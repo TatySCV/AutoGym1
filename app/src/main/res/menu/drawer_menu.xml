@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="AutoGym">
+        <menu>
+            <item
+                android:id="@+id/itm_inicio"
+                android:icon="@drawable/ic_launcher_background"
+                android:title="@string/app_name"></item>
+        </menu>
+    </item>
+
+    <item android:title="">
+        <menu>
+
+            <item
+                android:id="@+id/itm_maquinas"
+                android:icon="@drawable/ic_launcher_background"
+                android:title="@string/maquina"></item>
+
+            <item
+                android:id="@+id/irm_ejercicio"
+                android:icon="@drawable/ic_launcher_background"
+                android:title="@string/ejercicio"></item>
+
+        </menu>
+    </item>
+
+    <item android:title="">
+        <menu>
+
+            <item
+                android:id="@+id/itm_acercaDe"
+                android:icon="@drawable/ic_launcher_background"
+                android:title="@string/acercaDe"></item>
+
+        </menu>
+    </item>
+
+</menu>
