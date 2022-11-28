@@ -4,7 +4,7 @@
     <item android:title="AutoGym">
         <menu>
             <item
-                android:id="@+id/itm_inicio"
+                android:id="@+id/itm_principal"
                 android:icon="@drawable/ic_launcher_background"
                 android:title="@string/app_name"></item>
         </menu>
@@ -19,7 +19,7 @@
                 android:title="@string/maquina"></item>
 
             <item
-                android:id="@+id/irm_ejercicio"
+                android:id="@+id/itm_ejercicio"
                 android:icon="@drawable/ic_launcher_background"
                 android:title="@string/ejercicio"></item>
 

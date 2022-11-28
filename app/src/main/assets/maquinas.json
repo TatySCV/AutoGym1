@@ -1,0 +1,12 @@
+[
+  {
+    "id": "1",
+    "nombre": "maquina1",
+    "imagen": "imagen"
+  },
+  {
+    "id": "2",
+    "nombre": "maquina2",
+    "imagen": "imagen"
+  }
+]
