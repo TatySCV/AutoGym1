@@ -1,12 +1,17 @@
 [
   {
     "id": "1",
-    "nombre": "maquina1",
+    "nombre": "Caminadora",
     "imagen": "imagen"
   },
   {
     "id": "2",
-    "nombre": "maquina2",
+    "nombre": "Prensa",
+    "imagen": "imagen"
+  },
+  {
+    "id": "3",
+    "nombre": "Caminadora",
     "imagen": "imagen"
   }
 ]

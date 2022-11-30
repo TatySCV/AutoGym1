@@ -2,30 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <TextView
-        android:id="@+id/txt_idMaquina"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Id" />
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@color/white">
 
     <TextView
         android:id="@+id/txt_nombreMaquina"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nombre"/>
-
-    <TextView
-        android:id="@+id/txt_imagenMaquina"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Imagen"/>
+        android:text="Nombre Maquina"
+        android:layout_gravity="center"
+        android:textColor="@color/black"/>
 
     <Button
         android:id="@+id/btn_registrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ENTRAR"/>
+        android:text="ENTRAR"
+        android:layout_gravity="center"/>
 
 </LinearLayout>

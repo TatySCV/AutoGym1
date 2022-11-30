@@ -30,7 +30,6 @@ public class MaquinasActivity extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragments_maquinas, container, false);
 
-        txt_idMaquina = view.findViewById(R.id.txt_idMaquina);
         txt_nombreMaquina = view.findViewById(R.id.txt_nombreMaquina);
         btn_registrar = view.findViewById(R.id.btn_registrar);
 
@@ -75,6 +74,7 @@ public class MaquinasActivity extends Fragment{
 
     public void mostrarJson() throws JSONException {
 
+        String nombres="";
         JSONArray arreglo = new JSONArray(leerJson());
         //JSONObject object = new JSONObject(leerJson());
 
@@ -82,8 +82,13 @@ public class MaquinasActivity extends Fragment{
             JSONObject maquina=arreglo.getJSONObject(i);
             String id = maquina.getString("id");
             String name = maquina.getString("nombre");
-            Log.d("NOMBRE: ", name);
+
+            nombres += name + ", ";
+
+
         }
+
+        txt_nombreMaquina.setText(nombres);
 
         /*String id = object.getString("id");
         String name = object.getString("nombre");

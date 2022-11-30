@@ -10,7 +10,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:background="@color/white"
+        android:background="@color/primary"
         tools:ignore="MissingConstraints">
 
         <!--Aca es ideal para colocar el logo de la aplicación-->
