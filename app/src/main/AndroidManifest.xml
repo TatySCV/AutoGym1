@@ -29,6 +29,12 @@
         <activity
             android:name=".InicioActivity"
             android:theme="@style/Theme.Design.NoActionBar" />
+        <activity
+            android:name=".Fragments.LoginActivity"
+            android:theme="@style/Theme.Design.NoActionBar" />
+        <activity
+            android:name=".Fragments.ModuloAdmin"
+            android:theme="@style/Theme.Design.NoActionBar" />
 
     </application>
 

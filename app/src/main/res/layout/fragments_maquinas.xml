@@ -3,22 +3,113 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:background="@color/white">
+    android:layout_marginTop="80dp"
+    android:layout_marginBottom="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp"
+    android:background="@drawable/fondo_inicio">
 
     <TextView
-        android:id="@+id/txt_nombreMaquina"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nombre Maquina"
-        android:layout_gravity="center"
-        android:textColor="@color/black"/>
+        android:text="@string/titulo_maquinas"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"/>
 
-    <Button
-        android:id="@+id/btn_registrar"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ENTRAR"
-        android:layout_gravity="center"/>
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/txt_idMaquina"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="ID Máquina"
+            android:inputType="number"
+            android:textAlignment="center"/>
+
+        <ImageButton
+            android:id="@+id/btn_buscarMaquinas"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/style_button2"
+            android:src="@drawable/ic_buscar" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/txt_nombreMaquina"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Nombre máquina"
+        android:inputType="textPersonName"
+        android:textAlignment="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+        <Button
+            android:id="@+id/btn_modificarMaquinas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Modificar"
+            android:textColor="@color/black"
+            android:background="@drawable/style_button2"/>
+
+        <Button
+            android:id="@+id/btn_RegistrarMaquinas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Registrar"
+            android:textColor="@color/black"
+            android:background="@drawable/style_button2"/>
+
+        <Button
+            android:id="@+id/btn_EliminarMaquinas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Eliminar"
+            android:textColor="@color/black"
+            android:background="@drawable/style_button2"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:text="@string/lista_maquinas"
+        android:textAllCaps="true"
+        android:textColor="@color/white"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#99000000">
+
+        <ListView
+            android:id="@+id/lvMaquinas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:cacheColorHint="@color/white"/>
+
+    </LinearLayout>
+
+
 
 </LinearLayout>

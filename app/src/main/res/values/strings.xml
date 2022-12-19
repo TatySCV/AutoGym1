@@ -1,9 +1,31 @@
 <resources>
+
     <string name="app_name">AutoGym</string>
     <string name="maquina">Máquinas</string>
     <string name="ejercicio">Ejercicios</string>
     <string name="acercaDe">Acerca De</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+
+
+    <string name="iniciarSesion">Iniciar Sesión</string>
+    <string name="correo">Correo electrónico</string>
+    <string name="contrasena">Contraseña</string>
+    <string name="iniciarSesionAdmin">Iniciar Sesión Administrador</string>
+    <string name="noSesion">¿No cuentas con sesión de Administrador? ¡Contáctanos!</string>
+    <string name="sesionUsuario">Inicia sesion como usuario</string>
+
+
+    <string name="titulo_maquinas">Ingreso de Máquinas</string>
+    <string name="lista_maquinas">Listado de Máquinas</string>
+
+    <string name="titulo_ejercicios">Ingreso de Ejercicios</string>
+    <string name="lista_ejercicios">Listado de Ejercicios</string>
+
+    <string name="titulo_rutinas">Ingreso de Rutinas</string>
+    <string name="lista_rutinas">Listado de Rutinas</string>
+
+    <string name="titulo_complementos">Ingreso de Complementos</string>
+    <string name="lista_complementos">Listado de Complementos</string>
 
 </resources>

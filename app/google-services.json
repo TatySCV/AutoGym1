@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "920446161050",
-    "project_id": "autogym-4a58b",
-    "storage_bucket": "autogym-4a58b.appspot.com"
+    "project_number": "771253966529",
+    "project_id": "autogym-34f07",
+    "storage_bucket": "autogym-34f07.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:920446161050:android:c94cb2980fe31816f4cf23",
+        "mobilesdk_app_id": "1:771253966529:android:e4bffcbf96e4ae92f22640",
         "android_client_info": {
           "package_name": "com.example.autogym1"
         }
       },
       "oauth_client": [
         {
-          "client_id": "920446161050-7ak45uli3ma2rfm1tn02qaug0v6n3enp.apps.googleusercontent.com",
+          "client_id": "771253966529-9u53fqm08iipv3oefv71ahqaeoltqb30.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.autogym1",
+            "certificate_hash": "a1378a3dc3bbaf22f2b08008404dbf8eb5c72c7b"
+          }
+        },
+        {
+          "client_id": "771253966529-jfjpvhnksj2jpcn91eh786rnio44jo5m.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCFDmer6y_qnfOrEPEjEk8AkNu0beGPaMQ"
+          "current_key": "AIzaSyBeF9e5KSpsX1AL2_GYXThrKrKyn-XkS4I"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "920446161050-7ak45uli3ma2rfm1tn02qaug0v6n3enp.apps.googleusercontent.com",
+              "client_id": "771253966529-jfjpvhnksj2jpcn91eh786rnio44jo5m.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

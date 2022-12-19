@@ -14,8 +14,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.autogym1.Fragments.AcercaDeActivity;
 import com.example.autogym1.Fragments.EjerciciosActivity;
+import com.example.autogym1.Fragments.LoginActivity;
 import com.example.autogym1.Fragments.MaquinasActivity;
-import com.example.autogym1.Fragments.PrincipalActivity;
 import com.google.android.material.navigation.NavigationView;
 
 public class InicioActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -52,7 +52,7 @@ public class InicioActivity extends AppCompatActivity implements NavigationView.
         //Debemos iniciarlo con el fragment principal.
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.container, new PrincipalActivity());
+        fragmentTransaction.add(R.id.container, new LoginActivity());
         fragmentTransaction.commit();
 
 
@@ -62,10 +62,10 @@ public class InicioActivity extends AppCompatActivity implements NavigationView.
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         drawerLayout.closeDrawer(GravityCompat.START); //Para que el menu se cierre automaticamente
         //Opciones del menu
-        if(menuItem.getItemId() == R.id.itm_principal){
+        /*if(menuItem.getItemId() == R.id.itm_principal){
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.container, new PrincipalActivity());
+            fragmentTransaction.replace(R.id.container, new LoginActivity());
             fragmentTransaction.commit();
         }
 
@@ -89,7 +89,7 @@ public class InicioActivity extends AppCompatActivity implements NavigationView.
             fragmentTransaction.replace(R.id.container, new AcercaDeActivity());
             fragmentTransaction.commit();
         }
-
+*/
         return false;
     }
 

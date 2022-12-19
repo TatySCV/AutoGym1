@@ -15,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setContentView(R.layout.splash_screen);
+
         //Creacion pantalla de carga
         TimerTask tarea = new TimerTask() {
             @Override
@@ -25,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         Timer tiempo = new Timer();
-        tiempo.schedule(tarea, 5000); //Tiempo que la pantalla espera, 5 segundos
+        tiempo.schedule(tarea, 3000); //Tiempo que la pantalla espera, 5 segundos
 
     }
 }
