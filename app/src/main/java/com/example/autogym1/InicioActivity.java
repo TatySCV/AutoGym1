@@ -13,6 +13,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.autogym1.Fragments.AcercaDeActivity;
+import com.example.autogym1.Fragments.ClienteEjercicios;
+import com.example.autogym1.Fragments.ClienteMaquinas;
 import com.example.autogym1.Fragments.EjerciciosActivity;
 import com.example.autogym1.Fragments.LoginActivity;
 import com.example.autogym1.Fragments.MaquinasActivity;
@@ -62,7 +64,7 @@ public class InicioActivity extends AppCompatActivity implements NavigationView.
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         drawerLayout.closeDrawer(GravityCompat.START); //Para que el menu se cierre automaticamente
         //Opciones del menu
-        /*if(menuItem.getItemId() == R.id.itm_principal){
+        if(menuItem.getItemId() == R.id.itm_principal){
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container, new LoginActivity());
@@ -72,14 +74,14 @@ public class InicioActivity extends AppCompatActivity implements NavigationView.
         if(menuItem.getItemId() == R.id.itm_ejercicio){
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.container, new EjerciciosActivity());
+            fragmentTransaction.replace(R.id.container, new ClienteEjercicios());
             fragmentTransaction.commit();
         }
 
         if(menuItem.getItemId() == R.id.itm_maquinas){
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.container, new MaquinasActivity());
+            fragmentTransaction.replace(R.id.container, new ClienteMaquinas());
             fragmentTransaction.commit();
         }
 
@@ -89,7 +91,7 @@ public class InicioActivity extends AppCompatActivity implements NavigationView.
             fragmentTransaction.replace(R.id.container, new AcercaDeActivity());
             fragmentTransaction.commit();
         }
-*/
+
         return false;
     }
 

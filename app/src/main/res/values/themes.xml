@@ -19,6 +19,10 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="AlertDialogTema" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorPrimary">@color/secundary</item>
+    </style>
+
     <style name="Theme.AutoGym1.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.AutoGym1.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

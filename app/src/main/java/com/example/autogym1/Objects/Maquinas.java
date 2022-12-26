@@ -21,6 +21,8 @@ public class Maquinas {
         this.imagen_maquina = imagen_maquina;
     }
 
+
+
     public Maquinas(int id_maquina, String nombre_maquina, String descripción_maquina, int imagen_maquina) {
         this.id_maquina = id_maquina;
         this.nombre_maquina = nombre_maquina;
@@ -62,6 +64,6 @@ public class Maquinas {
 
     @Override
     public String toString() {
-        return id_maquina + nombre_maquina + descripción_maquina + imagen_maquina;
+        return nombre_maquina;
     }
 }

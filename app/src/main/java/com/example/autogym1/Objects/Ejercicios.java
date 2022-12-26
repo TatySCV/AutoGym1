@@ -6,8 +6,8 @@ public class Ejercicios {
 
     private int id_ejercicio;
     private String nombre_ejercicio;
-    private ArrayList<Maquinas> maquinas;
-    private ArrayList<Complementos> complementos;
+    private String maquinas;
+    private String complementos;
 
     public Ejercicios() {
     }
@@ -17,7 +17,7 @@ public class Ejercicios {
         this.nombre_ejercicio = nombre_ejercicio;
     }
 
-    public Ejercicios(int id_ejercicio, String nombre_ejercicio, ArrayList<Maquinas> maquinas, ArrayList<Complementos> complementos) {
+    public Ejercicios(int id_ejercicio, String nombre_ejercicio, String maquinas, String complementos) {
         this.id_ejercicio = id_ejercicio;
         this.nombre_ejercicio = nombre_ejercicio;
         this.maquinas = maquinas;
@@ -40,19 +40,19 @@ public class Ejercicios {
         this.nombre_ejercicio = nombre_ejercicio;
     }
 
-    public ArrayList<Maquinas> getMaquinas() {
+    public String getMaquinas() {
         return maquinas;
     }
 
-    public void setMaquinas(ArrayList<Maquinas> maquinas) {
+    public void setMaquinas(String maquinas) {
         this.maquinas = maquinas;
     }
 
-    public ArrayList<Complementos> getComplementos() {
+    public String getComplementos() {
         return complementos;
     }
 
-    public void setComplementos(ArrayList<Complementos> complementos) {
+    public void setComplementos(String complementos) {
         this.complementos = complementos;
     }
 

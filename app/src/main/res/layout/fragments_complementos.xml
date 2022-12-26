@@ -13,7 +13,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/titulo_ejercicios"
+        android:text="@string/titulo_complementos"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textSize="24sp"
@@ -26,7 +26,7 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/txt_idEjercicio"
+            android:id="@+id/txt_idComplemento"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -36,7 +36,7 @@
             android:textAlignment="center"/>
 
         <ImageButton
-            android:id="@+id/btn_buscarEjercicios"
+            android:id="@+id/btn_buscarComplemento"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -45,31 +45,13 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/txt_nombreEjercicio"
+        android:id="@+id/txt_nombreComplemento"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Nombre Ejercicio"
+        android:hint="Nombre Complemento"
         android:inputType="textPersonName"
         android:textAlignment="center"/>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center">
-
-        <Spinner
-            android:id="@+id/spn_complemento"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <Spinner
-            android:id="@+id/spn_maquina"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -78,7 +60,7 @@
         android:layout_marginTop="10dp">
 
         <Button
-            android:id="@+id/btn_modificarEjercicios"
+            android:id="@+id/btn_modificarComplementos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -87,7 +69,7 @@
             android:background="@drawable/style_button2"/>
 
         <Button
-            android:id="@+id/btn_RegistrarEjercicios"
+            android:id="@+id/btn_RegistrarComplementos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -96,7 +78,7 @@
             android:background="@drawable/style_button2"/>
 
         <Button
-            android:id="@+id/btn_EliminarEjercicios"
+            android:id="@+id/btn_EliminarComplementos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -112,7 +94,7 @@
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:text="@string/lista_ejercicios"
+        android:text="@string/lista_complementos"
         android:textAllCaps="true"
         android:textColor="@color/white"/>
 
@@ -122,7 +104,7 @@
         android:background="#99000000">
 
         <ListView
-            android:id="@+id/lvEjercicios"
+            android:id="@+id/lvComplementos"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:cacheColorHint="@color/white"/>

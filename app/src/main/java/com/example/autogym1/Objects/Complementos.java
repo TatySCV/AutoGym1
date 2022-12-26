@@ -46,6 +46,6 @@ public class Complementos {
 
     @Override
     public String toString() {
-        return id_complemento+nombre_complemento+imagen_complemento;
+        return nombre_complemento;
     }
 }

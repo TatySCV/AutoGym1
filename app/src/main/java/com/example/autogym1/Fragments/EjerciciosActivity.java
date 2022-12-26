@@ -1,6 +1,5 @@
 package com.example.autogym1.Fragments;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -9,10 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,7 +21,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.autogym1.ListAdapterEjercicios;
-import com.example.autogym1.ListAdapterMaquinas;
+import com.example.autogym1.Objects.Complementos;
 import com.example.autogym1.Objects.Ejercicios;
 import com.example.autogym1.Objects.Maquinas;
 import com.example.autogym1.R;
@@ -31,18 +32,25 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 public class EjerciciosActivity extends Fragment {
 
     private EditText txt_idEjercicio, txt_nombreEjercicio;
-    private Button btn_modificarEjercicios, btn_registrarEjercicios, btn_EliminarEjercicios, btn_selComplemento, btn_selRutina;
+    private Button btn_modificarEjercicios, btn_registrarEjercicios, btn_EliminarEjercicios;
     private ImageButton btn_buscarEjercicios;
     private ListView lvEjercicios;
+    private Spinner spn_complemento, spn_maquina;
+
+    private String complemento, maquina;
+
     ListAdapterEjercicios adapter;
     List<Ejercicios> lisEjercicios = new ArrayList<>();
+
+    List<Complementos> complementos = new ArrayList<>();
+    List<Maquinas> maquinas = new ArrayList<>();
+
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragments_ejercicios, container, false);
@@ -54,18 +62,17 @@ public class EjerciciosActivity extends Fragment {
         btn_registrarEjercicios  = (Button)   view.findViewById(R.id.btn_RegistrarEjercicios);
         btn_EliminarEjercicios  = (Button)   view.findViewById(R.id.btn_EliminarEjercicios);
         lvEjercicios = (ListView) view.findViewById(R.id.lvEjercicios);
-        btn_selComplemento = view.findViewById(R.id.btn_selComplemento);
-        btn_selRutina= view.findViewById(R.id.btn_selRutina);
 
-        //Boton complemento
-
-        //Boton rutina
+        spn_complemento = view.findViewById(R.id.spn_complemento);
+        spn_maquina = view.findViewById(R.id.spn_maquina);
 
         botonBuscar();
         botonModificar();
         botonRegistrar();
         botonEliminar();
         listarEjercicios();
+        Complemento();
+        Maquina();
 
         return view;
     }
@@ -75,6 +82,84 @@ public class EjerciciosActivity extends Fragment {
         super.onStart();
         //codigo programable
 
+    }
+
+    private void Maquina(){
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference dbref = db.getReference(Maquinas.class.getSimpleName());
+
+        dbref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    for(DataSnapshot x:snapshot.getChildren()){
+                        int id = Integer.parseInt(x.child("id_maquina").getValue().toString());
+                        String nombre = x.child("nombre_maquina").getValue().toString();
+                        maquinas.add(new Maquinas(id, nombre));
+                    }
+
+                    ArrayAdapter<Maquinas> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, maquinas);
+                    spn_maquina.setAdapter(arrayAdapter);
+
+                    spn_maquina.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                            maquina = adapterView.getItemAtPosition(i).toString();
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void Complemento(){
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference dbref = db.getReference(Complementos.class.getSimpleName());
+
+        dbref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    for(DataSnapshot x:snapshot.getChildren()){
+                        int id = Integer.parseInt(x.child("id_complemento").getValue().toString());
+                        String nombre = x.child("nombre_complemento").getValue().toString();
+                        complementos.add(new Complementos(id, nombre));
+                    }
+
+                    ArrayAdapter<Complementos> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, complementos);
+                    spn_complemento.setAdapter(arrayAdapter);
+
+                    spn_complemento.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                            complemento = adapterView.getItemAtPosition(i).toString();
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void botonBuscar(){
@@ -155,7 +240,7 @@ public class EjerciciosActivity extends Fragment {
                             }
 
                             if(res==false){
-                                Ejercicios ejercicio = new Ejercicios(id_ejercicio, nombre_ejercicio);
+                                Ejercicios ejercicio = new Ejercicios(id_ejercicio, nombre_ejercicio, maquina, complemento);
                                 dbref.push().setValue(ejercicio);
                                 ocultarTeclado();
                                 Toast.makeText(getActivity(), "Datos insertados correctamente", Toast.LENGTH_SHORT).show();
