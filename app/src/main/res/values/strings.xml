@@ -22,8 +22,8 @@
     <string name="titulo_ejercicios">Ingreso de Ejercicios</string>
     <string name="lista_ejercicios">Listado de Ejercicios</string>
 
-    <string name="titulo_rutinas">Ingreso de Rutinas</string>
-    <string name="lista_rutinas">Listado de Rutinas</string>
+    <string name="titulo_musculos">Ingreso de Musculos</string>
+    <string name="lista_musculos">Listado de Musculos</string>
 
     <string name="titulo_complementos">Ingreso de Complementos</string>
     <string name="lista_complementos">Listado de Complementos</string>

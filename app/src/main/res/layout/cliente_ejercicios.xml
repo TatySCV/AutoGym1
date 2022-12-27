@@ -3,23 +3,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_marginTop="80dp">
+    android:layout_marginTop="20dp"
+    android:background="@drawable/fondo">
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp">
         <Spinner
             android:id="@+id/spn_filtroComplemento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/black"/>
+            android:background="#55000000"/>
         <Spinner
             android:id="@+id/spn_filtroMaquina"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/black"/>
+            android:background="#55000000"/>
     </RelativeLayout>
 
     <TextView
@@ -41,7 +43,7 @@
             android:id="@+id/btn_filtrarComplemento"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/style_button"
+            android:background="@drawable/style_button2"
             android:layout_marginRight="50dp"
             android:text="   Complemento  "
             android:textColor="@color/black"/>
@@ -49,10 +51,20 @@
             android:id="@+id/btn_filtrarMaquina"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/style_button"
+            android:background="@drawable/style_button2"
             android:text="   Maquina   "
             android:textColor="@color/black"/>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_limpiarFiltro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/style_button2"
+        android:text="   Limpiar Filtro   "
+        android:textColor="@color/black"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center"/>
 
     <TextView
         android:layout_width="match_parent"

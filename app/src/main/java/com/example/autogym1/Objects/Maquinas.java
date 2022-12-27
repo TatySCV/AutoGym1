@@ -4,6 +4,7 @@ public class Maquinas {
 
     private int id_maquina;
     private String nombre_maquina;
+    private String musculo;
     private String descripción_maquina;
     private int imagen_maquina;
 
@@ -15,13 +16,17 @@ public class Maquinas {
         this.nombre_maquina = nombre_maquina;
     }
 
+    public Maquinas(int id_maquina, String nombre_maquina, String musculo) {
+        this.id_maquina = id_maquina;
+        this.nombre_maquina = nombre_maquina;
+        this.musculo = musculo;
+    }
+
     public Maquinas(int id_maquina, String nombre_maquina, int imagen_maquina) {
         this.id_maquina = id_maquina;
         this.nombre_maquina = nombre_maquina;
         this.imagen_maquina = imagen_maquina;
     }
-
-
 
     public Maquinas(int id_maquina, String nombre_maquina, String descripción_maquina, int imagen_maquina) {
         this.id_maquina = id_maquina;
@@ -60,6 +65,14 @@ public class Maquinas {
 
     public void setImagen_maquina(int imagen_maquina) {
         this.imagen_maquina = imagen_maquina;
+    }
+
+    public String getMusculo() {
+        return musculo;
+    }
+
+    public void setMusculo(String musculo) {
+        this.musculo = musculo;
     }
 
     @Override

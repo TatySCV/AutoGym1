@@ -1,23 +1,17 @@
 package com.example.autogym1.Fragments;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,8 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
-import com.example.autogym1.ListAdapterMaquinas;
-import com.example.autogym1.Objects.Maquinas;
+import com.example.autogym1.ListAdapterMusculos;
 import com.example.autogym1.Objects.Musculos;
 import com.example.autogym1.R;
 import com.google.firebase.database.ChildEventListener;
@@ -36,49 +29,34 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+public class MusculosActivity extends Fragment {
 
-public class MaquinasActivity extends Fragment{
+    private EditText txt_idMusculo, txt_nombreMusculo;
+    private Button btn_modificarMusculos, btn_registrarMusculos, btn_EliminarMusculos;
+    private ImageButton btn_buscarMusculos;
+    private ListView lvMusculos;
+    ListAdapterMusculos adapter;
+    List<Musculos> lisMusculos = new ArrayList<>();
 
-    private EditText txt_idMaquina, txt_nombreMaquina;
-    private Button btn_modificarMaquinas, btn_registrarMaquinas, btn_EliminarMaquinas;
-    private ImageButton btn_buscarMaquinas;
-    private ListView lvMaquinas;
-    private Spinner spn_musculos;
-    private String musculo;
-    ListAdapterMaquinas adapter;
-    List<Maquinas> lisMaquinas = new ArrayList<>();
-
-    List<Musculos> musculos = new ArrayList<>();
-
-    @SuppressLint("MissingInflatedId")
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view= inflater.inflate(R.layout.fragments_maquinas, container, false);
+        View view= inflater.inflate(R.layout.fragments_musculos, container, false);
 
-        txt_idMaquina   = (EditText) view.findViewById(R.id.txt_idMaquina);
-        txt_nombreMaquina  = (EditText) view.findViewById(R.id.txt_nombreMaquina);
-        btn_buscarMaquinas  = (ImageButton)   view.findViewById(R.id.btn_buscarMaquinas);
-        btn_modificarMaquinas  = (Button)   view.findViewById(R.id.btn_modificarMaquinas);
-        btn_registrarMaquinas  = (Button)   view.findViewById(R.id.btn_RegistrarMaquinas);
-        btn_EliminarMaquinas  = (Button)   view.findViewById(R.id.btn_EliminarMaquinas);
-        lvMaquinas = (ListView) view.findViewById(R.id.lvMaquinas);
-
-        spn_musculos = view.findViewById(R.id.spn_musculos);
+        txt_idMusculo   = (EditText) view.findViewById(R.id.txt_idMusculo);
+        txt_nombreMusculo  = (EditText) view.findViewById(R.id.txt_nombreMusculo);
+        btn_buscarMusculos  = (ImageButton)   view.findViewById(R.id.btn_buscarMusculo);
+        btn_modificarMusculos  = (Button)   view.findViewById(R.id.btn_modificarMusculos);
+        btn_registrarMusculos  = (Button)   view.findViewById(R.id.btn_RegistrarMusculos);
+        btn_EliminarMusculos  = (Button)   view.findViewById(R.id.btn_EliminarMusculos);
+        lvMusculos = (ListView) view.findViewById(R.id.lvMusculos);
 
         botonBuscar();
         botonModificar();
         botonRegistrar();
         botonEliminar();
-        listarMaquinas();
-        Musculo();
+        listarMusculos();
 
         return view;
     }
@@ -89,58 +67,19 @@ public class MaquinasActivity extends Fragment{
         //codigo programable
     }
 
-    private void Musculo(){
-        FirebaseDatabase db = FirebaseDatabase.getInstance();
-        DatabaseReference dbref = db.getReference(Musculos.class.getSimpleName());
-
-        dbref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    for(DataSnapshot x:snapshot.getChildren()){
-                        int id = Integer.parseInt(x.child("id_musculo").getValue().toString());
-                        String nombre = x.child("nombre_musculo").getValue().toString();
-                        musculos.add(new Musculos(id, nombre));
-                    }
-
-                    ArrayAdapter<Musculos> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, musculos);
-                    spn_musculos.setAdapter(arrayAdapter);
-
-                    spn_musculos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            musculo = adapterView.getItemAtPosition(i).toString();
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
-
-                        }
-                    });
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
     private void botonBuscar(){
-        btn_buscarMaquinas.setOnClickListener(new View.OnClickListener() {
+        btn_buscarMusculos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if(txt_idMaquina.getText().toString().trim().isEmpty()){
+                if(txt_idMusculo.getText().toString().trim().isEmpty()){
                     ocultarTeclado();
                     Toast.makeText(getActivity(), "Ingrese ID para realizar busqueda", Toast.LENGTH_SHORT).show();
                 }else{
-                    int id=Integer.parseInt(txt_idMaquina.getText().toString());
+                    int id=Integer.parseInt(txt_idMusculo.getText().toString());
                     //Conexion con la base de datos
                     FirebaseDatabase db = FirebaseDatabase.getInstance();
-                    DatabaseReference dbref = db.getReference(Maquinas.class.getSimpleName());
+                    DatabaseReference dbref = db.getReference(Musculos.class.getSimpleName());
 
                     dbref.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -148,10 +87,10 @@ public class MaquinasActivity extends Fragment{
                             String aux=Integer.toString(id);
                             boolean res=false;
                             for (DataSnapshot x:snapshot.getChildren()) {
-                                if(aux.equalsIgnoreCase(x.child("id_maquina").getValue().toString())){
+                                if(aux.equalsIgnoreCase(x.child("id_musculo").getValue().toString())){
                                     res=true;
                                     ocultarTeclado();
-                                    txt_nombreMaquina.setText(x.child("nombre_maquina").getValue().toString());
+                                    txt_nombreMusculo.setText(x.child("nombre_musculo").getValue().toString());
                                     break;
                                 }
                             }
@@ -174,55 +113,55 @@ public class MaquinasActivity extends Fragment{
     }
 
     private void botonRegistrar(){
-        btn_registrarMaquinas.setOnClickListener(new View.OnClickListener(){
+        btn_registrarMusculos.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
 
-                if(txt_idMaquina.getText().toString().trim().isEmpty() || txt_nombreMaquina.getText().toString().trim().isEmpty()){
+                if(txt_idMusculo.getText().toString().trim().isEmpty() || txt_nombreMusculo.getText().toString().trim().isEmpty()){
                     ocultarTeclado();
                     Toast.makeText(getActivity(), "Complete los datos faltantes", Toast.LENGTH_SHORT).show();
                 }else{
-                    int id_maquina=Integer.parseInt(txt_idMaquina.getText().toString());
-                    String nombre_maquina=txt_nombreMaquina.getText().toString();
+                    int id_musculo=Integer.parseInt(txt_idMusculo.getText().toString());
+                    String nombre_musculo=txt_nombreMusculo.getText().toString();
 
                     //Conexion a firebase
                     FirebaseDatabase db = FirebaseDatabase.getInstance();
-                    DatabaseReference dbref = db.getReference(Maquinas.class.getSimpleName());
+                    DatabaseReference dbref = db.getReference(Musculos.class.getSimpleName());
 
                     //Evento de firebase para la inserción
                     dbref.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                            String aux=Integer.toString(id_maquina);
+                            String aux=Integer.toString(id_musculo);
                             boolean res = false;
                             for (DataSnapshot x:snapshot.getChildren()){
-                                if(x.child("id_maquina").getValue().toString().equalsIgnoreCase(aux)){
+                                if(x.child("id_musculo").getValue().toString().equalsIgnoreCase(aux)){
                                     res=true;
                                     ocultarTeclado();
-                                    Toast.makeText(getActivity(), "Error, el ID ("+id_maquina+") ya está registrado", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), "Error, el ID ("+id_musculo+") ya está registrado", Toast.LENGTH_SHORT).show();
                                     break;
                                 }
                             }
 
                             boolean res2 = false;
                             for (DataSnapshot x:snapshot.getChildren()){
-                                if(x.child("nombre_maquina").getValue().toString().equals(nombre_maquina)){
+                                if(x.child("nombre_musculo").getValue().toString().equals(nombre_musculo)){
                                     res2=true;
                                     ocultarTeclado();
-                                    Toast.makeText(getActivity(), "Advertencia: El Nombre ("+nombre_maquina+") ya está registrado", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), "Advertencia: El Nombre ("+nombre_musculo+") ya está registrado", Toast.LENGTH_SHORT).show();
                                     break;
                                 }
                             }
 
 
                             if(res==false){
-                                Maquinas maquina = new Maquinas(id_maquina, nombre_maquina, musculo);
-                                dbref.push().setValue(maquina);
+                                Musculos musculo = new Musculos(id_musculo, nombre_musculo);
+                                dbref.push().setValue(musculo);
                                 ocultarTeclado();
                                 Toast.makeText(getActivity(), "Datos insertados correctamente", Toast.LENGTH_SHORT).show();
-                                txt_idMaquina.setText("");
-                                txt_nombreMaquina.setText("");
+                                txt_idMusculo.setText("");
+                                txt_nombreMusculo.setText("");
                             }
 
                         }
@@ -242,36 +181,36 @@ public class MaquinasActivity extends Fragment{
     }
 
     private void botonModificar(){
-        btn_modificarMaquinas.setOnClickListener(new View.OnClickListener() {
+        btn_modificarMusculos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if(txt_idMaquina.getText().toString().trim().isEmpty() || txt_nombreMaquina.getText().toString().trim().isEmpty()){
+                if(txt_idMusculo.getText().toString().trim().isEmpty() || txt_nombreMusculo.getText().toString().trim().isEmpty()){
                     ocultarTeclado();
                     Toast.makeText(getActivity(), "Complete los datos faltantes para actualizar registro", Toast.LENGTH_SHORT).show();
                 }else{
-                    int id_maquina=Integer.parseInt(txt_idMaquina.getText().toString());
-                    String nombre_maquina=txt_nombreMaquina.getText().toString();
+                    int id_musculo=Integer.parseInt(txt_idMusculo.getText().toString());
+                    String nombre_musculo=txt_nombreMusculo.getText().toString();
 
                     //Conexion a firebase
                     FirebaseDatabase db = FirebaseDatabase.getInstance();
-                    DatabaseReference dbref = db.getReference(Maquinas.class.getSimpleName());
+                    DatabaseReference dbref = db.getReference(Musculos.class.getSimpleName());
 
                     //Evento de firebase para la inserción
                     dbref.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                            String aux=Integer.toString(id_maquina);
+                            String aux=Integer.toString(id_musculo);
                             boolean res = false;
                             for (DataSnapshot x:snapshot.getChildren()){
-                                if(x.child("id_maquina").getValue().toString().equalsIgnoreCase(aux)){
+                                if(x.child("id_musculo").getValue().toString().equalsIgnoreCase(aux)){
                                     res=true;
                                     ocultarTeclado();
-                                    x.getRef().child("nombre_maquina").setValue(nombre_maquina);
-                                    txt_nombreMaquina.setText("");
-                                    txt_idMaquina.setText("");
-                                    listarMaquinas();
+                                    x.getRef().child("nombre_musculo").setValue(nombre_musculo);
+                                    txt_nombreMusculo.setText("");
+                                    txt_idMusculo.setText("");
+                                    listarMusculos();
                                     break;
                                 }
                             }
@@ -279,8 +218,8 @@ public class MaquinasActivity extends Fragment{
                             if(res==false){
                                 ocultarTeclado();
                                 Toast.makeText(getActivity(), "Id: "+aux+" no encontrado", Toast.LENGTH_SHORT).show();
-                                txt_idMaquina.setText("");
-                                txt_nombreMaquina.setText("");
+                                txt_idMusculo.setText("");
+                                txt_nombreMusculo.setText("");
                             }
 
                         }
@@ -300,18 +239,18 @@ public class MaquinasActivity extends Fragment{
     }
 
     private void botonEliminar(){
-        btn_EliminarMaquinas.setOnClickListener(new View.OnClickListener() {
+        btn_EliminarMusculos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if(txt_idMaquina.getText().toString().trim().isEmpty()){
+                if(txt_idMusculo.getText().toString().trim().isEmpty()){
                     ocultarTeclado();
                     Toast.makeText(getActivity(), "Ingrese ID para eliminar", Toast.LENGTH_SHORT).show();
                 }else {
-                    int id = Integer.parseInt(txt_idMaquina.getText().toString());
+                    int id = Integer.parseInt(txt_idMusculo.getText().toString());
                     //Conexion con la base de datos
                     FirebaseDatabase db = FirebaseDatabase.getInstance();
-                    DatabaseReference dbref = db.getReference(Maquinas.class.getSimpleName());
+                    DatabaseReference dbref = db.getReference(Musculos.class.getSimpleName());
 
                     dbref.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -319,7 +258,7 @@ public class MaquinasActivity extends Fragment{
                             String aux = Integer.toString(id);
                             final boolean[] res = {false};
                             for (DataSnapshot x : snapshot.getChildren()) {
-                                if (aux.equalsIgnoreCase(x.child("id_maquina").getValue().toString())) {
+                                if (aux.equalsIgnoreCase(x.child("id_musculo").getValue().toString())) {
 
                                     AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
                                     a.setCancelable(false);
@@ -337,7 +276,7 @@ public class MaquinasActivity extends Fragment{
                                             res[0] = true;
                                             ocultarTeclado();
                                             x.getRef().removeValue();
-                                            listarMaquinas();
+                                            listarMusculos();
 
                                         }
                                     });
@@ -363,20 +302,20 @@ public class MaquinasActivity extends Fragment{
         });
     }
 
-    private void listarMaquinas(){
+    private void listarMusculos(){
         //Conexion con la base de datos
         FirebaseDatabase db = FirebaseDatabase.getInstance();
-        DatabaseReference dbref = db.getReference(Maquinas.class.getSimpleName());
+        DatabaseReference dbref = db.getReference(Musculos.class.getSimpleName());
 
-        adapter = new ListAdapterMaquinas(getActivity(), R.layout.item_row_maquinas, lisMaquinas);
-        lvMaquinas.setAdapter(adapter);
+        adapter = new ListAdapterMusculos(getActivity(), R.layout.item_row_maquinas, lisMusculos);
+        lvMusculos.setAdapter(adapter);
 
         dbref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 //Cuando se agregen datos nuevos a la db
-                Maquinas maquinas = snapshot.getValue(Maquinas.class);
-                lisMaquinas.add(maquinas);
+                Musculos musculos = snapshot.getValue(Musculos.class);
+                lisMusculos.add(musculos);
                 adapter.notifyDataSetChanged();
             }
 
@@ -403,16 +342,16 @@ public class MaquinasActivity extends Fragment{
             }
         });
 
-        lvMaquinas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lvMusculos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Maquinas maquinas = lisMaquinas.get(i);
+                Musculos musculos = lisMusculos.get(i);
                 AlertDialog.Builder a = new AlertDialog.Builder(getActivity());
                 a.setCancelable(true);
                 a.setTitle("Maquina seleccionada");
 
-                String msg= "ID: "+maquinas.getId_maquina()+"\n";
-                msg+="NOMBRE: "+maquinas.getNombre_maquina();
+                String msg= "ID: "+musculos.getId_musculo()+"\n";
+                msg+="NOMBRE: "+musculos.getNombre_musculo();
 
                 a.setMessage(msg);
                 a.show();
@@ -429,5 +368,3 @@ public class MaquinasActivity extends Fragment{
     }
 
 }
-
-

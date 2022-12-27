@@ -54,12 +54,12 @@
             android:textColor="@color/black"/>
 
         <Button
-            android:id="@+id/btn_rutinas"
+            android:id="@+id/btn_musculos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/style_button2"
             android:layout_margin="20dp"
-            android:text="Rutinas"
+            android:text="Musculos"
             android:textAllCaps="true"
             android:textSize="20sp"
             android:textStyle="bold"

@@ -1,5 +1,6 @@
 package com.example.autogym1.Fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -32,12 +34,12 @@ import java.util.List;
 
 public class ClienteEjercicios extends Fragment {
 
-    ListAdapterEjercicios adapter;
+    ListAdapterEjercicios adapter, adap;
     List<Ejercicios> lisEjercicios = new ArrayList<>();
     private ListView lvCliEjercicios;
 
     private Spinner spn_filtroComplemento, spn_filtroMaquina;
-    private Button btn_filtroComplemento, btn_filtroMaquina;
+    private Button btn_filtroComplemento, btn_filtroMaquina, btn_limpiarFiltro;
 
     List<Complementos> complementos = new ArrayList<>();
     List<Maquinas> maquinas = new ArrayList<>();
@@ -45,6 +47,7 @@ public class ClienteEjercicios extends Fragment {
     private String maquina1, complemento1;
 
 
+    @SuppressLint("MissingInflatedId")
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.cliente_ejercicios, container, false);
 
@@ -54,6 +57,7 @@ public class ClienteEjercicios extends Fragment {
         spn_filtroMaquina = view.findViewById(R.id.spn_filtroMaquina);
         btn_filtroComplemento = view.findViewById(R.id.btn_filtrarComplemento);
         btn_filtroMaquina = view.findViewById(R.id.btn_filtrarMaquina);
+        btn_limpiarFiltro = view.findViewById(R.id.btn_limpiarFiltro);
 
         spn_filtroMaquina.setVisibility(View.INVISIBLE);
         spn_filtroComplemento.setVisibility(View.INVISIBLE);
@@ -105,6 +109,20 @@ public class ClienteEjercicios extends Fragment {
             }
         });
 
+        btn_limpiarFiltro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                spn_filtroMaquina.setVisibility(View.INVISIBLE);
+                spn_filtroComplemento.setVisibility(View.INVISIBLE);
+
+                lisEjercicios.clear();
+                adapter = new ListAdapterEjercicios(getActivity(), R.layout.item_row_maquinas, lisEjercicios);
+                lvCliEjercicios.setAdapter(adapter);
+
+                listar();
+            }
+        });
 
         return view;
     }
@@ -166,7 +184,7 @@ public class ClienteEjercicios extends Fragment {
             }
         });
 
-    }
+    }  //Metodo para listar los ejercicios
 
     private void llenar(){
 
@@ -185,6 +203,7 @@ public class ClienteEjercicios extends Fragment {
 
                     ArrayAdapter<Complementos> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, complementos);
                     spn_filtroComplemento.setAdapter(arrayAdapter);
+
                 }
             }
 
@@ -217,17 +236,73 @@ public class ClienteEjercicios extends Fragment {
 
             }
         });
-    }
+    } //Metodo para llenar los spinner
 
     private void filtrarComplemento(String complemento){
 
-        Toast.makeText(getActivity(), "Filtro Complemento", Toast.LENGTH_SHORT).show();
+        lisEjercicios.clear();
+        adapter = new ListAdapterEjercicios(getActivity(), R.layout.item_row_maquinas, lisEjercicios);
+        lvCliEjercicios.setAdapter(adapter);
+
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference dbref = db.getReference(Ejercicios.class.getSimpleName());
+
+        Query filtroComplemento = dbref.orderByChild("complementos").equalTo(complemento);
+
+        filtroComplemento.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for(DataSnapshot x:snapshot.getChildren()){
+                    Ejercicios ejercicios = snapshot.getValue(Ejercicios.class);
+                    Ejercicios eje = x.getValue(Ejercicios.class);
+                    lisEjercicios.add(new Ejercicios(eje.getId_ejercicio(), eje.getNombre_ejercicio()));
+                }
+
+                adap = new ListAdapterEjercicios(getActivity(), R.layout.item_row_maquinas, lisEjercicios);
+                lvCliEjercicios.setAdapter(adap);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 
     private void filtrarMaquina(String maquina){
 
-        Toast.makeText(getActivity(), "Filtro Maquina", Toast.LENGTH_SHORT).show();
+        lisEjercicios.clear();
+        adapter = new ListAdapterEjercicios(getActivity(), R.layout.item_row_maquinas, lisEjercicios);
+        lvCliEjercicios.setAdapter(adapter);
+
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference dbref = db.getReference(Ejercicios.class.getSimpleName());
+
+        Query filtroComplemento = dbref.orderByChild("maquinas").equalTo(maquina);
+
+        filtroComplemento.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for(DataSnapshot x:snapshot.getChildren()){
+                    Ejercicios ejercicios = snapshot.getValue(Ejercicios.class);
+                    Ejercicios eje = x.getValue(Ejercicios.class);
+                    lisEjercicios.add(new Ejercicios(eje.getId_ejercicio(), eje.getNombre_ejercicio()));
+                }
+
+                adap = new ListAdapterEjercicios(getActivity(), R.layout.item_row_maquinas, lisEjercicios);
+                lvCliEjercicios.setAdapter(adap);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 

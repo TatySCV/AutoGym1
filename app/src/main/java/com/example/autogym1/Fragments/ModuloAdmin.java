@@ -1,5 +1,6 @@
 package com.example.autogym1.Fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +17,9 @@ import com.example.autogym1.R;
 
 public class ModuloAdmin extends Fragment {
 
-    Button btn_maquinas, btn_ejercicios, btn_complementos, btn_rutinas;
+    Button btn_maquinas, btn_ejercicios, btn_complementos, btn_musculos;
 
+    @SuppressLint("MissingInflatedId")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -26,7 +28,7 @@ public class ModuloAdmin extends Fragment {
         btn_maquinas = view.findViewById(R.id.btn_maquinas);
         btn_ejercicios = view.findViewById(R.id.btn_ejercicios);
         btn_complementos = view.findViewById(R.id.btn_complementos);
-        btn_rutinas = view.findViewById(R.id.btn_rutinas);
+        btn_musculos = view.findViewById(R.id.btn_musculos);
 
         btn_maquinas.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,10 +54,10 @@ public class ModuloAdmin extends Fragment {
             }
         });
 
-        btn_rutinas.setOnClickListener(new View.OnClickListener() {
+        btn_musculos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment fragment = new RutinasActivity();
+                Fragment fragment = new MusculosActivity();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.container, fragment);
